@@ -20,32 +20,46 @@
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       text-align: center;
-      width: 320px;
+      width: 360px;
     }
     h1 {
       margin-bottom: 20px;
       color: #333;
     }
-    input[type=number] {
+    input[type=text], input[type=number], input[type=email] {
       width: 100%;
       padding: 12px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 16px;
     }
     button {
       width: 100%;
-      padding: 12px;
+      padding: 14px;
       background-color: #4CAF50;
       color: white;
       border: none;
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
+      margin-top: 10px;
     }
     button:hover {
       background-color: #45a049;
+    }
+    .small-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 10px;
+    }
+    .card-fields {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .card-fields input {
+      flex: 1;
     }
   </style>
 </head>
@@ -53,8 +67,16 @@
   <div class="container">
     <h1>Top up Balance</h1>
     <form id="pay-form">
-      <input type="number" id="amount" name="amount" min="1" placeholder="Amount in €" required>
+      <input type="text" name="fullname" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="number" name="amount" min="1" placeholder="Amount in €" required>
+      <input type="text" name="cardnumber" placeholder="Card Number" required>
+      <div class="card-fields">
+        <input type="text" name="expiry" placeholder="MM/YY" required>
+        <input type="text" name="cvv" placeholder="CVV" required>
+      </div>
       <button type="submit">Pay</button>
+      <p class="small-text">Your payment is secure and encrypted.</p>
     </form>
   </div>
 </body>
