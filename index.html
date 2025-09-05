@@ -76,6 +76,21 @@
     .payment-icons img {
       vertical-align: middle;
     }
+    /* Новий стиль для Amount з € */
+    .amount-wrapper {
+      position: relative;
+    }
+    .amount-wrapper input {
+      padding-right: 25px; /* місце для знаку € */
+    }
+    .amount-wrapper span {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-weight: 600;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -97,10 +112,13 @@
         <small class="helper-text">We'll send your payment confirmation here.</small>
       </div>
 
-      <!-- Amount -->
+      <!-- Amount з € -->
       <div class="form-group">
-        <label for="amount">Amount (€)</label>
-        <input type="number" id="amount" name="amount" min="1" placeholder="Enter amount" required>
+        <label for="amount">Amount</label>
+        <div class="amount-wrapper">
+          <input type="number" id="amount" name="amount" min="1" placeholder="Enter amount" required>
+          <span>€</span>
+        </div>
       </div>
 
       <!-- Pay Button -->
