@@ -26,13 +26,32 @@
       margin-bottom: 20px;
       color: #333;
     }
-    input[type=text], input[type=number], input[type=email] {
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    .form-group input {
       width: 100%;
       padding: 12px;
-      margin-bottom: 15px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 16px;
+    }
+    .form-group input:focus {
+      border-color: #4CAF50;
+      outline: none;
+      box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+    .helper-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
     }
     button {
       width: 100%;
@@ -47,19 +66,6 @@
     }
     button:hover {
       background-color: #45a049;
-    }
-    .small-text {
-      font-size: 12px;
-      color: #666;
-      margin-top: 10px;
-    }
-    .card-fields {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    .card-fields input {
-      flex: 1;
     }
     .payment-icons {
       display: flex;
@@ -76,16 +82,32 @@
   <div class="container">
     <h1>Top up Balance</h1>
     <form id="pay-form">
-      <input type="text" name="fullname" placeholder="Full Name" required>
-      <input type="email" name="email" placeholder="Email Address" required>
-      <input type="number" name="amount" min="1" placeholder="Amount in €" required>
-      <input type="text" name="cardnumber" placeholder="Card Number" required>
-      <div class="card-fields">
-        <input type="text" name="expiry" placeholder="MM/YY" required>
-        <input type="text" name="cvv" placeholder="CVV" required>
+      <!-- Full Name -->
+      <div class="form-group">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" name="fullname" placeholder="John Doe" required>
       </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required
+               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+               title="Please enter a valid email address">
+        <small class="helper-text">We'll send your payment confirmation here.</small>
+      </div>
+
+      <!-- Amount -->
+      <div class="form-group">
+        <label for="amount">Amount (€)</label>
+        <input type="number" id="amount" name="amount" min="1" placeholder="Enter amount" required>
+      </div>
+
+      <!-- Pay Button -->
       <button type="submit">Pay</button>
-      <p class="small-text">Your payment is secure and encrypted.</p>
+      <p class="helper-text">Your payment is secure and encrypted.</p>
+
+      <!-- Payment Icons -->
       <div class="payment-icons">
         <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" width="50">
         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="MasterCard" width="50">
