@@ -5,23 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Configuration Payment</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Google reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen relative">
   <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md text-center">
     <h1 class="text-2xl font-bold mb-6">Configuration Payment</h1>
 
-    <!-- Checkbox anti-robot -->
-    <div class="mb-4">
-      <label class="inline-flex items-center">
-        <input type="checkbox" id="robotCheck" class="form-checkbox h-5 w-5 text-blue-600">
-        <span class="ml-2">I’m not a robot 🤖</span>
-      </label>
-    </div>
-
-    <!-- Cookie consent -->
-    <div class="mb-4 bg-gray-100 p-3 rounded-lg">
-      <p class="text-sm mb-2">We use cookies to improve your experience. 🍪</p>
-      <button id="acceptCookies" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">Accept Cookies</button>
+    <!-- Google reCAPTCHA -->
+    <div class="mb-4 flex justify-center">
+      <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY" data-callback="captchaSuccess"></div>
     </div>
 
     <!-- Pay button -->
@@ -31,7 +24,7 @@
         href="https://pay.coingate.com/pay/config_payment_001"
         target="_blank"
         rel="noopener noreferrer nofollow"
-        class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition opacity-50 pointer-events-none"
+        class="bg-yellow-500 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition opacity-50 pointer-events-none"
       >
         💸 Pay with Crypto (via Coingate)
       </a>
@@ -39,36 +32,45 @@
 
     <!-- Logos -->
     <div class="flex justify-center space-x-4 mt-8">
-      <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.svg" alt="Bitcoin" class="h-6">
-      <img src="https://cryptologos.cc/logos/ethereum-eth-logo.svg" alt="Ethereum" class="h-6">
-      <img src="https://cryptologos.cc/logos/tether-usdt-logo.svg" alt="USDT" class="h-6">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg" alt="Visa" class="h-6">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Mastercard-logo.png" alt="Mastercard" class="h-6">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" class="h-6">
+      <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin" class="h-6">
+      <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum" class="h-6">
+      <img src="https://cryptologos.cc/logos/tether-usdt-logo.png" alt="USDT" class="h-6">
     </div>
+  </div>
+
+  <!-- Cookie banner -->
+  <div id="cookieBanner" class="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4 flex justify-between items-center">
+    <span>🍪 We use cookies to ensure you get the best experience on our website.</span>
+    <button id="acceptCookies" class="bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">Accept</button>
   </div>
 
   <script>
     let cookiesAccepted = false;
-    let robotChecked = false;
+    let captchaPassed = false;
 
     const payButton = document.getElementById("payButton");
-    const robotCheck = document.getElementById("robotCheck");
+    const cookieBanner = document.getElementById("cookieBanner");
     const acceptCookies = document.getElementById("acceptCookies");
 
     function updateButton() {
-      if (cookiesAccepted && robotChecked) {
+      if (cookiesAccepted && captchaPassed) {
         payButton.classList.remove("opacity-50", "pointer-events-none");
       }
     }
 
-    robotCheck.addEventListener("change", (e) => {
-      robotChecked = e.target.checked;
+    // reCAPTCHA callback
+    function captchaSuccess() {
+      captchaPassed = true;
       updateButton();
-    });
+    }
 
+    // Cookie accept
     acceptCookies.addEventListener("click", () => {
       cookiesAccepted = true;
-      acceptCookies.textContent = "Cookies Accepted ✅";
-      acceptCookies.disabled = true;
-      acceptCookies.classList.add("bg-green-500");
+      cookieBanner.style.display = "none";
       updateButton();
     });
   </script>
