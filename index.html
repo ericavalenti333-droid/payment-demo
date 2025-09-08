@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Secure Payment</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,18 +18,30 @@
     }
     .container {
       background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.15);
       text-align: center;
-      width: 350px;
+      width: 380px;
     }
     .pay-btn {
-      margin-top: 20px;
+      margin-top: 25px;
     }
-    .pay-btn img {
-      width: 200px;
-      cursor: pointer;
+    .pay-btn a {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #b45309);
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      padding: 12px 25px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .pay-btn a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
     /* Cookie banner */
     .cookie-banner {
@@ -41,6 +54,7 @@
       padding: 15px;
       text-align: center;
       font-size: 14px;
+      z-index: 9999;
     }
     .cookie-banner button {
       background: #4caf50;
@@ -52,30 +66,29 @@
       border-radius: 5px;
     }
   </style>
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
   <div class="container">
     <h2>Payment Verification</h2>
-    <p>Please confirm you are not a robot to proceed with payment.</p>
+    <p>Conferma che non sei un robot per procedere al pagamento.</p>
     
     <!-- Google reCAPTCHA -->
     <form action="?" method="POST">
       <div class="g-recaptcha" data-sitekey="6LeZS8IrAAAAAOukc0grsrUUUTK0N2pljQ3cRWIv"></div>
     </form>
 
-    <!-- CoinGate button -->
+    <!-- CoinGate custom button -->
     <div class="pay-btn">
       <a href="https://pay.coingate.com/pay/config_payment_001" target="_blank" rel="noopener noreferrer">
-        <img src="https://coingate.com/assets/buttons/light-pay-with-coingate.png" alt="Pay with CoinGate" />
+        Prosegui con pagamento
       </a>
     </div>
   </div>
 
   <!-- Cookie Banner -->
   <div class="cookie-banner" id="cookieBanner">
-    This website uses cookies to ensure you get the best experience. 
-    <button onclick="acceptCookies()">Accept</button>
+    Questo sito utilizza i cookie per garantire la migliore esperienza. 
+    <button onclick="acceptCookies()">Accetta</button>
   </div>
 
   <script>
